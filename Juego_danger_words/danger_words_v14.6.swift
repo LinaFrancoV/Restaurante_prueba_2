@@ -36,12 +36,11 @@ class PlayDangerWords {
     func guessTheLetter(_ characterArray: [Character]) -> Character {
         print("Enter a letter: ", terminator: "")
 
-        
-        while letterEnteredByUser.isLetter == false || Sring(letterEnteredByUser ).count != 1 {
+        while letterEnteredByUser.isLetter == false || String(letterEnteredByUser).count != 1 {
             print("Please enter only one letter: ", terminator: "")
             letterEnteredByUser = Character((readLine() ?? "").lowercased())
         }
-        while characterArray.contains(letter) {
+        while characterArray.contains(letterEnteredByUser) {
             print("You already guessed that letter, try another one: ", terminator: "")
             letterEnteredByUser  = Character((readLine() ?? "").lowercased())
         }
@@ -57,7 +56,9 @@ class PlayDangerWords {
             let guessResult = guessTheLetter(arrayToGuessLetter)
             
             if secretWord.contains(guessResult) {
-                arrayToGuessLetter.append(guessResult)
+                arrayToGuessLetter.append(guessResult) //verificar funcioinalidad de arrayToGuessLetter
+                //chatgpt propone el uso de self. por q?
+                // self.arrayToGuessLetter.append(guessResult)
                 print("Well done! You guessed a letter.")
             } else {
                 numberOfAttemps -= 1
@@ -68,6 +69,8 @@ class PlayDangerWords {
                     print("Game Over! The word was: \(secretWord)")
                     break
                 } else if Set(secretWord).isSubset(of: Set(guessTheLetter)) {
+                   // propuesta chat gpt -> if Set<Character>(secretWord).isSubset(of: Set<Character>(guessTheLetter)) {
+
                     print("Congratulations! You guessed the word: \(secretWord)")
                     break
                 }
