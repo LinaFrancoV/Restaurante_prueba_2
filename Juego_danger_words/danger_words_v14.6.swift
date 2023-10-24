@@ -5,13 +5,12 @@ class PlayDangerWords {
     var numberOfAttempts: Int = 8
     var arrayToGuessResult: [Character] = []
 
-    func generateRandomWord(_ wordsForTheGame: [String]) -> String {
-        return wordsForTheGame.randomElement() ?? ""
-    }
-    
     init(arrayToGuessLetter: [Character], characterArray: [Character]) {
         self.arrayToGuessLetter = arrayToGuessLetter
         self.characterArray = characterArray
+    }
+    func generateRandomWord(_ wordsForTheGame: [String]) -> String {
+        return wordsForTheGame.randomElement() ?? ""
     }
     
     var letterEnteredByUser = Character((readLine() ?? "").lowercased())
