@@ -3,7 +3,6 @@ import Foundation
 class PlayDangerWords {
  
     let wordsForTheGame: [String] = ["algorithm", "language", "compiler", "variable", "function", "loop", "class", "object", "inheritance", "polymorphism", "encapsulation", "modularity", "debugging", "integration", "development", "frontend", "backend", "database", "API", "framework", "library", "programmer", "syntax", "compilation", "interpretation", "link", "optimization", "repository", "constant"]
-    let secretWord: "String" = cw(w)
     var numberOfAttemps: Int = 8
     var arrayToGuessLetter: [Character] = []
     var characterArray: [Character]
@@ -14,6 +13,9 @@ class PlayDangerWords {
         self.arrayToGuessLetter = arrayToGuessLetter
         self.characterArray = characterArray
     }
+    
+    var letterEnteredByUser = Character((readLine() ?? "").lowercased())
+    
     //Generador de una palabra aleatoria dentro del array wordsForTheGame
     func generateFromRandomWord(_ wordsForTheGame: [String]) -> String {
         let randomWord = wordsForTheGame.randomElement() ?? ""
@@ -21,9 +23,9 @@ class PlayDangerWords {
     }
     //Identificador de una letra en una palabra
     func letterIdentifierL(_ randomWord: String, _ characterArray: [Character]) {
-        for letter in randomWord {
-            if characterArray.contains(letter) {
-                print(letter, terminator: " ")
+        for letterEnteredByUser in randomWord {
+            if characterArray.contains(letterEnteredByUser) {
+                print(letterEnteredByUser, terminator: " ")
             } else {
                 print("_", terminator: " ")
             }
@@ -33,23 +35,24 @@ class PlayDangerWords {
     //Busqueda de una letra solicitada al usuario dentro de un array de caracteres
     func guessTheLetter(_ characterArray: [Character]) -> Character {
         print("Enter a letter: ", terminator: "")
-        var letterEnteredByUser s= Character((readLine() ?? "").lowercased())
+
         
-        while letterEnteredByUser.isLetter == false || String(letterEnteredByUser ).count != 1 {
+        while letterEnteredByUser.isLetter == false || Sring(letterEnteredByUser ).count != 1 {
             print("Please enter only one letter: ", terminator: "")
             letterEnteredByUser = Character((readLine() ?? "").lowercased())
         }
-        while characterArray.contains(l) {
+        while characterArray.contains(letter) {
             print("You already guessed that letter, try another one: ", terminator: "")
             letterEnteredByUser  = Character((readLine() ?? "").lowercased())
         }
         return letterEnteredByUser
     }
     //Generador del juego
-    func initdangerWords(_ secretWord: String, _ arrayToGuessLetter: [Character] , _ numberOfAttemps: Int) {
+    func initdangerWords(_ arrayToGuessLetter: [Character]) {
         print("Welcome to the Danger Words game!")
-        
+        let secretWord = generateFromRandomWord (wordsForTheGame)
         while true {
+            
             letterIdentifierL(secretWord, arrayToGuessLetter)
             let guessResult = guessTheLetter(arrayToGuessLetter)
             
@@ -74,4 +77,5 @@ class PlayDangerWords {
     
 }
 
-PlayDangerWords.initdangerWords()
+let game = PlayDangerWords()
+    game.initdangerWords(["a", "b", "c"])
