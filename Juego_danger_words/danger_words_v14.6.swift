@@ -9,7 +9,7 @@ class PlayDangerWords {
     
     
     //inicializador de las variables
-    init(arrayToGuessLetter: [Character], gameWord: String, characterArray: [Character]) {
+    init(arrayToGuessLetter: [Character], characterArray: [Character]) {
         self.arrayToGuessLetter = arrayToGuessLetter
         self.characterArray = characterArray
     }
