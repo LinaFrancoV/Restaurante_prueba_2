@@ -3,31 +3,27 @@ import Foundation
 class PlayDangerWords {
  
     let wordsForTheGame: [String] = ["algorithm", "language", "compiler", "variable", "function", "loop", "class", "object", "inheritance", "polymorphism", "encapsulation", "modularity", "debugging", "integration", "development", "frontend", "backend", "database", "API", "framework", "library", "programmer", "syntax", "compilation", "interpretation", "link", "optimization", "repository", "constant"]
-    let secretWord: "String"
+    let secretWord: "String" = cw(w)
+    var numberOfAttemps: Int = 8
     var arrayToGuessLetter: [Character] = []
-    var trys: Int = 8
-    var gameWord: String
     var characterArray: [Character]
     
     
     //inicializador de las variables
-    init(arrayToGuessLetter: [Character], trys: Int, secretWord: "String", gameWord: String, characterArray: [Character]) {
+    init(arrayToGuessLetter: [Character], gameWord: String, characterArray: [Character]) {
         self.arrayToGuessLetter = arrayToGuessLetter
-        self.secretWord = secretWord
-        self.gameWord = gameWord
         self.characterArray = characterArray
     }
-    
     //Generador de una palabra aleatoria dentro del array wordsForTheGame
-    func generateFromRandomWord( wordsForTheGame: [String]) -> String {
+    func generateFromRandomWord(_ wordsForTheGame: [String]) -> String {
         let randomWord = wordsForTheGame.randomElement() ?? ""
         return randomWord
     }
-    //
-    func letterIdentifierL( word: String, characterArray: [Character]) {
-        for l in word {
-            if characterArray.contains(l) {
-                print(l, terminator: " ")
+    //Identificador de una letra en una palabra
+    func letterIdentifierL(_ randomWord: String, _ characterArray: [Character]) {
+        for letter in randomWord {
+            if characterArray.contains(letter) {
+                print(letter, terminator: " ")
             } else {
                 print("_", terminator: " ")
             }
@@ -35,9 +31,9 @@ class PlayDangerWords {
         print()
     }
     //Busqueda de una letra solicitada al usuario dentro de un array de caracteres
-    func guessTheLetter( characterArray: [Character]) -> Character {
+    func guessTheLetter(_ characterArray: [Character]) -> Character {
         print("Enter a letter: ", terminator: "")
-        var letterEnteredByUser = Character((readLine() ?? "").lowercased())
+        var letterEnteredByUser s= Character((readLine() ?? "").lowercased())
         
         while letterEnteredByUser.isLetter == false || String(letterEnteredByUser ).count != 1 {
             print("Please enter only one letter: ", terminator: "")
@@ -49,27 +45,27 @@ class PlayDangerWords {
         }
         return letterEnteredByUser
     }
-    //
-    func dangerWords(secret: String, guessed: [Character] = [], trys = Int) {
+    //Generador del juego
+    func initdangerWords(_ secretWord: String, _ arrayToGuessLetter: [Character] , _ numberOfAttemps: Int) {
         print("Welcome to the Danger Words game!")
         
         while true {
-            sw(secret, guessed)
-            let L = take(guessed)
+            letterIdentifierL(secretWord, arrayToGuessLetter)
+            let guessResult = guessTheLetter(arrayToGuessLetter)
             
-            if secret.contains(L) {
-                guessed.append(L)
+            if secretWord.contains(guessResult) {
+                arrayToGuessLetter.append(guessResult)
                 print("Well done! You guessed a letter.")
             } else {
-                trys -= 1
+                numberOfAttemps -= 1
                 print("Sorry, that letter is not in the word.")
-                print("You have \(trys) lives remaining.")
+                print("You have \(numberOfAttemps) lives remaining.")
                 
-                if trys == 0 {
-                    print("Game Over! The word was: \(secret)")
+                if numberOfAttemps == 0 {
+                    print("Game Over! The word was: \(secretWord)")
                     break
-                } else if Set(secret).isSubset(of: Set(guessed)) {
-                    print("Congratulations! You guessed the word: \(secret)")
+                } else if Set(secretWord).isSubset(of: Set(guessTheLetter)) {
+                    print("Congratulations! You guessed the word: \(secretWord)")
                     break
                 }
             }
@@ -78,6 +74,4 @@ class PlayDangerWords {
     
 }
 
-trys = 8
-secret = cw(w)
-PlayDangerWords()
+PlayDangerWords.initdangerWords()
