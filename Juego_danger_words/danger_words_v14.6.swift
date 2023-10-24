@@ -1,13 +1,15 @@
-let w = ["algorithm", "language", "compiler", "variable", "function", "loop", "class", "object", "inheritance", "polymorphism", "encapsulation", "modularity", "debugging", "integration", "development", "frontend", "backend", "database", "API", "framework", "library", "programmer", "syntax", "compilation", "interpretation", "link", "optimization", "repository", "constant"]
+import Foundation
 
-func cw(_ w: [String]) -> String {
-    let s = w.randomElement() ?? ""
-    return s
+let wordsForTheGame = ["algorithm", "language", "compiler", "variable", "function", "loop", "class", "object", "inheritance", "polymorphism", "encapsulation", "modularity", "debugging", "integration", "development", "frontend", "backend", "database", "API", "framework", "library", "programmer", "syntax", "compilation", "interpretation", "link", "optimization", "repository", "constant"]
+
+func generateFromRandomWord(_ wordsForTheGame: [String]) -> String {
+    let randomWord = wordsForTheGame.randomElement() ?? ""
+    return randomWord
 }
 
-func sw(_ s: String, _ gl: [Character]) {
-    for l in s {
-        if gl.contains(l) {
+func letterIdentifierL(_ word: String, _ characterArray: [Character]) {
+    for l in word {
+        if characterArray.contains(l) {
             print(l, terminator: " ")
         } else {
             print("_", terminator: " ")
